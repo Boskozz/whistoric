@@ -1,0 +1,25 @@
+.fond-gris{
+    background-color: rgb(172, 175, 179)
+}
+
+.fond-bleu{
+    background-color: rgb(75, 103, 139)
+}
+
+.text-vert{
+    color: #00ac00;
+}
+
+.text-rouge{
+    color: #f8631f;
+}
+
+.text-gras{
+    font-weight: bold;
+}
+
+.arrondi {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}

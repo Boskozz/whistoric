@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des configurations disponibles{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% for config in configs %}
+        <div class="row">
+            <div class="col text-center">
+                <h4>{{ config.titre | upper }}</h4>
+            </div>
+        </div>
+        <div class="row mt-1 fond-bleu arrondi">
+            <div class="col-2 text-right text-white text-gras">Emballage</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                    </tr>
+                    <tr class="text-vert">
+                        <td>+{{ config.emb8Pos }}</td>
+                        <td>+{{ config.emb9Pos }}</td>
+                        <td>+{{ config.emb10Pos }}</td>
+                        <td>+{{ config.emb11Pos }}</td>
+                        <td>+{{ config.emb12Pos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.emb8Neg }}</td>
+                        <td>-{{ config.emb9Neg }}</td>
+                        <td>-{{ config.emb10Neg }}</td>
+                        <td>-{{ config.emb11Neg }}</td>
+                        <td>-{{ config.emb12Neg }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2 text-right text-white text-gras">Solo</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                    </tr>
+                    <tr class="text-vert">
+                        <td>+{{ config.solo6Pos }}</td>
+                        <td>+{{ config.solo7Pos }}</td>
+                        <td>+{{ config.solo8Pos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.solo6Neg }}</td>
+                        <td>-{{ config.solo7Neg }}</td>
+                        <td>-{{ config.solo8Neg }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-1 fond-bleu arrondi">
+            <div class="col-2 text-right text-white text-gras">Petite misère</div>
+            <div class="col-2 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr class="text-vert">
+                        <td>+{{ config.pmisPos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.pmisNeg }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2 text-right text-white text-gras">Picolissimo</div>
+            <div class="col-2 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr class="text-vert">
+                        <td>+{{ config.picoliPos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.picoliNeg }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2 text-right text-white text-gras">Picolo</div>
+            <div class="col-2 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr class="text-vert">
+                        <td>+{{ config.picoloPos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.picoloNeg }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-1 fond-bleu arrondi">
+            <div class="col-2 text-right text-white text-gras">Abondance</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                    </tr>
+                    <tr class="text-vert">
+                        <td>+{{ config.abon9Pos }}</td>
+                        <td>+{{ config.abon10Pos }}</td>
+                        <td>+{{ config.abon11Pos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.abon9Neg }}</td>
+                        <td>-{{ config.abon10Neg }}</td>
+                        <td>-{{ config.abon11Neg }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2 text-right text-white text-gras">Abondance sur table</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                    </tr>
+                    <tr class="text-vert">
+                        <td>+{{ config.abonst9Pos }}</td>
+                        <td>+{{ config.abonst10Pos }}</td>
+                        <td>+{{ config.abonst11Pos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.abonst9Neg }}</td>
+                        <td>-{{ config.abonst10Neg }}</td>
+                        <td>-{{ config.abonst11Neg }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-1 fond-bleu arrondi">
+            <div class="col-2 text-right text-white text-gras">Grande misère</div>
+            <div class="col-8 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr>
+                        <td>Normal</td>
+                        <td>Sur table</td>
+                        <td>Sur trou</td>
+                        <td>Sur trou sur table</td>
+                    </tr>
+                    <tr class="text-vert">
+                        <td>+{{ config.gmisPos }}</td>
+                        <td>+{{ config.gmstPos }}</td>
+                        <td>+{{ config.gmstaPos }}</td>
+                        <td>+{{ config.gmsttPos }}</td>
+                    </tr>
+                    <tr class="text-rouge">
+                        <td>-{{ config.gmisNeg }}</td>
+                        <td>-{{ config.gmstNeg }}</td>
+                        <td>-{{ config.gmstaNeg }}</td>
+                        <td>-{{ config.gmsttNeg }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-1 fond-bleu arrondi">
+            <div class="col-2 text-right text-white text-gras">Trou</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr class="text-vert">
+                        <td>{{ config.trou }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2 text-right text-white text-gras">Capot</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr class="text-vert">
+                        <td>{{ config.capot }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2 text-right text-white text-gras">Chelem</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr class="text-vert">
+                        <td>{{ config.ptsm }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-2 text-right text-white text-gras">Solo chelem</div>
+            <div class="col-4 fond-gris arrondi text-white">
+                <table class="table table-stripped text-center text-gras">
+                    <tr class="text-vert">
+                        <td>{{ config.gdsm }}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+        
+    {% endfor %}
+</div>
+{% endblock %}

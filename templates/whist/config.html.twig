@@ -1,0 +1,238 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configuration{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {{ form_start(form) }}
+            {{ form_row(form.titre) }}
+            <div class="row">
+                <div class="col-4">
+                    <h4>Emballage</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr>
+                            <th>8</th>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                            <th>12</th>
+                        </tr>
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.emb8Pos) }}</td>
+                            <td>{{ form_widget(form.emb9Pos) }}</td>
+                            <td>{{ form_widget(form.emb10Pos) }}</td>
+                            <td>{{ form_widget(form.emb11Pos) }}</td>
+                            <td>{{ form_widget(form.emb12Pos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.emb8Neg) }}</td>
+                            <td>{{ form_widget(form.emb9Neg) }}</td>
+                            <td>{{ form_widget(form.emb10Neg) }}</td>
+                            <td>{{ form_widget(form.emb11Neg) }}</td>
+                            <td>{{ form_widget(form.emb12Neg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Solo</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr>
+                            <th>6</th>
+                            <th>7</th>
+                            <th>8</th>
+                        </tr>
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.solo6Pos) }}</td>
+                            <td>{{ form_widget(form.solo7Pos) }}</td>
+                            <td>{{ form_widget(form.solo8Pos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.solo6Neg) }}</td>
+                            <td>{{ form_widget(form.solo7Neg) }}</td>
+                            <td>{{ form_widget(form.solo8Neg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Petite misère</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.pmisPos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.pmisNeg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Picolissimo</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.picoliPos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.picoliNeg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Picolo</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.picoloPos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.picoloNeg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Abondance</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                        </tr>
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.abon9Pos) }}</td>
+                            <td>{{ form_widget(form.abon10Pos) }}</td>
+                            <td>{{ form_widget(form.abon11Pos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.abon9Neg) }}</td>
+                            <td>{{ form_widget(form.abon10Neg) }}</td>
+                            <td>{{ form_widget(form.abon11Neg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Abondance sur table</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr>
+                            <th>9</th>
+                            <th>10</th>
+                            <th>11</th>
+                        </tr>
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.abonst9Pos) }}</td>
+                            <td>{{ form_widget(form.abonst10Pos) }}</td>
+                            <td>{{ form_widget(form.abonst11Pos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.abonst9Neg) }}</td>
+                            <td>{{ form_widget(form.abonst10Neg) }}</td>
+                            <td>{{ form_widget(form.abonst11Neg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Grande misère</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr>
+                            <th>Normal</th>
+                            <th>Sur table</th>
+                            <th>Sur trou</th>
+                            <th>Sur trou sur table</th>
+                        </tr>
+                        <tr class="bg-success">
+                            <td>{{ form_widget(form.gmisPos) }}</td>
+                            <td>{{ form_widget(form.gmstPos) }}</td>
+                            <td>{{ form_widget(form.gmstaPos) }}</td>
+                            <td>{{ form_widget(form.gmsttPos) }}</td>
+                        </tr>
+                        <tr class="bg-danger">
+                            <td>{{ form_widget(form.gmisNeg) }}</td>
+                            <td>{{ form_widget(form.gmstNeg) }}</td>
+                            <td>{{ form_widget(form.gmstaNeg) }}</td>
+                            <td>{{ form_widget(form.gmsttNeg) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Trou</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr class="bg-light">
+                            <td>{{ form_widget(form.trou) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Capot</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr class="bg-light">
+                            <td>{{ form_widget(form.capot) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Chelem</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr class="bg-light">
+                            <td>{{ form_widget(form.ptsm) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h4>Solo Chelem</h4>
+                </div>
+                <div class="col-8 bg-light">
+                    <table class="table table-stripped text-center">
+                        <tr class="bg-light">
+                            <td>{{ form_widget(form.gdsm) }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Validez la configuration</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

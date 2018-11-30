@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parties en cours{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Partie en cours</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Carté restant</th>
+                        <th>En cours</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for partie in parties %}
+                    <tr>
+                        <td>{{ partie.debut | date('d/m/Y') }}</td>
+                        <td>{{ partie.fin | date('d/m/Y') }}</td>
+                        <td>{{ partie.totCarte }}</td>
+                        <td>{% if partie.enCours == true %}V{% else %}X{% endif %}</td>
+                        <td><a href="{{ path('whist_show', {'id': partie.id}) }}" class="btn btn-sm btn-outline-dark">Voir</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

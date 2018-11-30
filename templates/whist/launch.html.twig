@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lanceur{% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">Commencer</button>
+            {{ form_end(form) }}
+        </div>
+        <div class="col-md-4">
+            <img src="http://lefoudeproust.fr/wp-content/uploads/2016/06/27-Gilray-Whist.png" width="600" alt="whist">
+            <a href="{{ path('config_show') }}" class="btn btn-primary mb-2">Voir les configurations de valeurs des contrats déjà existantes</a>
+            <a href="{{ path('config_create') }}" class="btn btn-primary mb-3">Ajouter une configuration des valeurs personnalisées</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block _partie_joueurs_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _partie_joueurs_widget %}
+    <h4>Ajoutez les noms des joueurs</h4>
+    <div class="row">
+        <div class="col-9">Nom des joueurs</div>
+        <div class="col-3">Et leur ordre</div>
+    </div>
+    {{ form_widget(form) }}
+    <div>
+        <em>
+        Remarque : Le premier joueur, "joueur 1", est celui qui débute la partie. Le second joueur, "joueur 2", est celui qui joue après le premier. Et ainsi de suite.
+        Il est également possible de changer l'ordre en cours de partie, bien que pas très réglementaire ;) Mais chez sois, on fait un peu ce qu'on veut !
+        Bon jeu à tous ...
+        </em>
+    </div>
+{% endblock %}
+
+{% block _partie_joueurs_entry_widget %}
+    <div class="form-group">
+        <div class="row">
+            <div class="col-9">
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="col-3">
+                {{ form_widget(form.ordre) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
