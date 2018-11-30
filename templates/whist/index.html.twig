@@ -5,12 +5,18 @@
 {% block body %}
 <div class="container">
     <div class="jumbotron mt-3">
-        <h1 class="display-3"><font style="vertical-align: inherit;">Whist</font></h1>
-        <p class="lead"><font style="vertical-align: inherit;">Description du site</font></p>
+        <h1 class="display-3"><font style="vertical-align: inherit;">Whist - Gestion des scores</font></h1>
+        <p class="lead"><font style="vertical-align: inherit;">Cette application permet de calculer les scores de vos parties de Whist.</font></p>
         <hr class="my-4">
-        <p><font style="vertical-align: inherit;">Autre info</font></p>
+        <p><font style="vertical-align: inherit;">
+        Vous avez la possibilité de définir vos propres tableaux des scores, et de les réutiliser.
+        De sauvegarder vos parties en cours ou terminées, pour évidemment soit les consulter soit reprendre la partie.
+        Il y aura également un système de classement entre vous, et peut être un classement générale.
+        Il y aura deux systèmes de gestion des points, l'un avec des scores unique pour les partants ( à venir ) 
+        et l'autre avec des scores équilibrés entre chaque ( pour un total = 0 ) 
+        </font></p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button"><font style="vertical-align: inherit;">Lancez vous !</font></a>
+            <a class="btn btn-primary btn-lg" href="{{ path('whist_launch') }}" role="button"><font style="vertical-align: inherit;">Lancez une partie !</font></a>
         </p>
     </div>
 </div>

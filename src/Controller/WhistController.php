@@ -102,7 +102,7 @@ class WhistController extends AbstractController
                 }
                 $carte->setNumero($i);
                 $partie->setTotCarte($i-1);
-                if ($i == 0){
+                if ($partie->getTotCarte() == 1){
                     $partie->setEnCours(false);
                 }
                 // PrePersist

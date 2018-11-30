@@ -95,6 +95,19 @@ class Carte
      * @ORM\Column(type="string", length=255)
      */
     private $contratPartants;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $accompagne;
+    
+    public function __construct(){
+        $this->debutDate = new \DateTime();
+        $this->brin = false;
+        $this->estGagnant = true;
+        $this->partants = new ArrayCollection();
+        $this->accompagne = false;
+    }
     
     /**
      * Permet de renvoyer les points correspondant au contrat choisi ainsi que le nombre de joueur nécessaire pour le réaliser
@@ -157,6 +170,114 @@ class Carte
                 $this->setContratPartants("Solo 8");
                 $nbJoueur = 1;
             break;
+            // Picolissimo, picolo, petite misère
+            case "picoli":
+                $gagnant = $this->partie->getConfig()->getPicoliPos();
+                $perdant = $this->partie->getConfig()->getPicoliNeg();
+                $this->setContratPartants("Picolissimo");
+                $nbJoueur = $this->bienAccompagne();
+            break; 
+            case "picolo":
+                $gagnant = $this->partie->getConfig()->getPicoloPos();
+                $perdant = $this->partie->getConfig()->getPicoloNeg();
+                $this->setContratPartants("Picolo");
+                $nbJoueur = $this->bienAccompagne();
+            break; 
+            case "pmis":
+                $gagnant = $this->partie->getConfig()->getPmisPos();
+                $perdant = $this->partie->getConfig()->getPmisNeg();
+                $this->setContratPartants("Petite misère");
+                $nbJoueur = $this->bienAccompagne();
+            break; 
+            // Abondance
+            case "abon9":
+                $gagnant = $this->partie->getConfig()->getAbon9Pos();
+                $perdant = $this->partie->getConfig()->getAbon9Neg();
+                $this->setContratPartants("Abondance 9");
+                $nbJoueur = 1;
+            break;
+            case "abon10":
+                $gagnant = $this->partie->getConfig()->getAbon10Pos();
+                $perdant = $this->partie->getConfig()->getAbon10Neg();
+                $this->setContratPartants("Abondance 10");
+                $nbJoueur = 1;
+            break;
+            case "abon11":
+                $gagnant = $this->partie->getConfig()->getAbon11Pos();
+                $perdant = $this->partie->getConfig()->getAbon11Neg();
+                $this->setContratPartants("Abondance 11");
+                $nbJoueur = 1;
+            break;
+            // Abondance sur table
+            case "abonst9":
+                $gagnant = $this->partie->getConfig()->getAbonst9Pos();
+                $perdant = $this->partie->getConfig()->getAbonst9Neg();
+                $this->setContratPartants("Abondance 9 sur table");
+                $nbJoueur = 1;
+            break;
+            case "abonst10":
+                $gagnant = $this->partie->getConfig()->getAbonst10Pos();
+                $perdant = $this->partie->getConfig()->getAbonst10Neg();
+                $this->setContratPartants("Abondance 10 sur table");
+                $nbJoueur = 1;
+            break;
+            case "abonst11":
+                $gagnant = $this->partie->getConfig()->getAbonst11Pos();
+                $perdant = $this->partie->getConfig()->getAbonst11Neg();
+                $this->setContratPartants("Abondance 11 sur table");
+                $nbJoueur = 1;
+            break;
+            // Grande misère
+            case "gmis":
+                $gagnant = $this->partie->getConfig()->getGmisPos();
+                $perdant = $this->partie->getConfig()->getGmisNeg();
+                $this->setContratPartants("Grande misère");
+                $nbJoueur = 1;
+            break;
+            case "gmst":
+                $gagnant = $this->partie->getConfig()->getGmstPos();
+                $perdant = $this->partie->getConfig()->getGmstNeg();
+                $this->setContratPartants("Grande misère sur trou");
+                $nbJoueur = 1;
+            break;
+            case "gmsta":
+                $gagnant = $this->partie->getConfig()->getGmstaPos();
+                $perdant = $this->partie->getConfig()->getGmstaNeg();
+                $this->setContratPartants("Grande misère sur table");
+                $nbJoueur = 1;
+            break;
+            case "gmstt":
+                $gagnant = $this->partie->getConfig()->getGmsttPos();
+                $perdant = $this->partie->getConfig()->getGmsttNeg();
+                $this->setContratPartants("Grande misère sur trou sur table");
+                $nbJoueur = 1;
+            break;
+            // Le reste : trou, capot, chelem et solo chelem
+            case "trou":
+                $gagnant = $this->partie->getConfig()->getTrou();
+                $perdant = $this->partie->getConfig()->getTrou();
+                $this->setContratPartants("Trou");
+                $nbJoueur = 2;
+            break;
+            case "capot":
+                $gagnant = $this->partie->getConfig()->getCapot();
+                $perdant = $this->partie->getConfig()->getCapot();
+                $this->setContratPartants("Capot");
+                $nbJoueur = 2;
+            break;
+            case "ptsm":
+                $gagnant = $this->partie->getConfig()->getPtsm();
+                $perdant = $this->partie->getConfig()->getPtsm();
+                $this->setContratPartants("Chelem");
+                $nbJoueur = 1;
+            break;
+            case "gdsm":
+                $gagnant = $this->partie->getConfig()->getGdsm();
+                $perdant = $this->partie->getConfig()->getGdsm();
+                $this->setContratPartants("Solo chelem");
+                $nbJoueur = 1;
+            break;
+
         }
         
         // Assignation des points gagnés ou perdus dans une variable unique
@@ -173,19 +294,20 @@ class Carte
         return compact('score', 'nbJoueur');
     }
 
+    public function bienAccompagne(){
+        if ($this->accompagne == true){
+            return 2;
+        } else {
+            return 1;
+        }
+    } 
+
     public function leBrin($i){
         if ($this->brin == true){
             return $i + 1;
         } else {
             return $i;
         }
-    }
-
-    public function __construct(){
-        $this->debutDate = new \DateTime();
-        $this->brin = false;
-        $this->estGagnant = true;
-        $this->partants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -371,6 +493,18 @@ class Carte
     public function setContratPartants(string $contratPartants): self
     {
         $this->contratPartants = $contratPartants;
+
+        return $this;
+    }
+
+    public function getAccompagne(): ?bool
+    {
+        return $this->accompagne;
+    }
+
+    public function setAccompagne(bool $accompagne): self
+    {
+        $this->accompagne = $accompagne;
 
         return $this;
     }

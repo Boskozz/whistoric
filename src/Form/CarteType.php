@@ -53,6 +53,7 @@ class CarteType extends AbstractType
                 'class' => JoueurLocal::class,
                 'choice_label' => 'nom',
                 'multiple' => true,
+                'expanded' => true,
                 'label' => 'joueur(s)',
                 'query_builder' => function (JoueurLocalRepository $er) use ($options) {
                     return $er->findByPartiePlayer($options['partieId']);
@@ -68,6 +69,10 @@ class CarteType extends AbstractType
                 ))
             ->add('brin', CheckboxType::class, array(
                 'label'    => 'Brin ?',
+                'required' => false,
+                ))
+            ->add('accompagne', CheckboxType::class, array(
+                'label'    => 'Accompagné ?',
                 'required' => false,
                 ))
         ;
