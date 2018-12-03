@@ -59,6 +59,12 @@ class Partie
      */
     private $joueurs;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="parties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $utilisateur;
+
     public function __construct() {
         $this->debut = new \DateTime();
         $this->enCours = true;
@@ -201,6 +207,18 @@ class Partie
                 $joueur->setPartie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?User
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?User $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

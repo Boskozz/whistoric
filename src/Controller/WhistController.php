@@ -52,6 +52,7 @@ class WhistController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $partie->setUtilisateur($this->getUser());
             for ($i=1; $i <5; $i++)$manager->persist(${'joueur'.$i});
             $manager->persist($partie);
             $manager->flush();
@@ -106,12 +107,13 @@ class WhistController extends AbstractController
                     $partie->setEnCours(false);
                 }
                 // PrePersist
+                $tot = $partie->getTotCarte();
                 $manager->persist($carte);
                 $manager->flush();
                 
                 $this->addFlash(
                     'success',
-                    "$i carté(s) restant"
+                    "$tot carté(s) restant"
                 );
                
             }
@@ -137,13 +139,14 @@ class WhistController extends AbstractController
     }
 
     /**
-     * Affiche les parties en cours
+     * Affiche la liste des parties de l'utilisateur en cours et terminée
      * @Route("/parties", name="partie_encours")
-     *
+     * PartieRepository $repo
      * @return void
      */
-    public function enCours(PartieRepository $repo){
-        $parties = $repo->findAll();
+    public function enCours(){
+        $user = $this->getUser();
+        $parties = $user->getParties();
         return $this->render('whist/partie.html.twig', [
             'parties' => $parties
         ]);

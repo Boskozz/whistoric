@@ -1,39 +1,86 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Parties en cours{% endblock %}
+{% block title %}Liste des parties en cours et terminées{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css">
+{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="row">
         <div class="col">
-            <h2>Partie en cours</h2>
+            <h2>Liste des parties en cours et terminées</h2>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <table class="table table-hover text-center">
-                <thead>
-                    <tr>
-                        <th>Début</th>
-                        <th>Fin</th>
-                        <th>Carté restant</th>
-                        <th>En cours</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for partie in parties %}
-                    <tr>
-                        <td>{{ partie.debut | date('d/m/Y') }}</td>
-                        <td>{{ partie.fin | date('d/m/Y') }}</td>
-                        <td>{{ partie.totCarte }}</td>
-                        <td>{% if partie.enCours == true %}V{% else %}X{% endif %}</td>
-                        <td><a href="{{ path('whist_show', {'id': partie.id}) }}" class="btn btn-sm btn-outline-dark">Voir</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-1">En Cours</a></li>
+                    <li><a href="#tabs-2">Terminées</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Début</th>
+                                <th>Fin</th>
+                                <th>Carté restant</th>
+                                <th>Joueurs</th>
+                                <th>Voir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for partie in parties if partie.enCours == true %}
+                            <tr>
+                                <td>{{ partie.debut | date('d/m/Y') }}</td>
+                                <td>{{ partie.fin | date('d/m/Y') }}</td>
+                                <td>{{ partie.totCarte }}</td>
+                                <td>{% for joueur in partie.joueurs %} {{ joueur.nom }} {% endfor %} </td>
+                                <td><a href="{{ path('whist_show', {'id': partie.id}) }}" class="btn btn-sm btn-outline-dark">Voir</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>               
+                </div>
+                <div id="tabs-2">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>Début</th>
+                                <th>Fin</th>
+                                <th>Joueurs</th>
+                                <th>Voir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for partie in parties if partie.enCours == false %}
+                            <tr>
+                                <td>{{ partie.debut | date('d/m/Y') }}</td>
+                                <td>{{ partie.fin | date('d/m/Y') }}</td>
+                                <td>{% for joueur in partie.joueurs %} {{ joueur.nom }} {% endfor %} </td>
+                                <td><a href="{{ path('whist_show', {'id': partie.id}) }}" class="btn btn-sm btn-outline-dark">Voir</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>                               
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="col">
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+</script>
 {% endblock %}

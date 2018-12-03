@@ -4,12 +4,13 @@
 
 {% block body %}
 <div class="container">
-    {% if app.request.query.get('start') %}
+{#     {% if app.request.query.get('start') %}
         <div class="alert alert-success">
             <h4 class="alert-heading">La partie est lancée ...</h4>
             <p><strong>Que le meilleur gagne ! Bon jeu à tous ! </strong></p>
         </div>
-    {% endif %}   
+    {% endif %} #}   
+    <h4>Partie lancée par : {{ partie.utilisateur.prenom ~ " " ~ partie.utilisateur.nom }}</h4>
     <table class="table table-hover table-bordered text-center">
         <thead>
             <tr class="bg-primary">
