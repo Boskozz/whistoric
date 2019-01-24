@@ -1,0 +1,17 @@
+Proposition de nom :
+--------------------
+Extension ovh = 2€/mois
+
+Flo : ami-du-whist
+Nico : whistiti
+JS : whistory
+
+
+--> Privatiser le site:
+ -> suppression register dans header et securisé par ROLE_ADMIN
+ -> ajout du champ role dans User
+ -> ajout d'une fixture pour les utilisateurs de base
+ -> ajout role_hierarchy dans Security
+--> ajout du bundle apache + ajout forcage https
+--> amélioration UI et url
+

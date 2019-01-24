@@ -115,163 +115,163 @@ class Carte
      * @return array
      */
     public function points(){
-        $gagnant;
-        $perdant;
-        $nbJoueur;
-        $score;
+        $gagnant = 0;
+        $perdant = 0;
+        $nbJoueur = 0;
+        $score = 0;
         switch($this->contrat) {
             // EMBALLAGE
-            case "emb8":
+            case "emb_8":
                 $gagnant = $this->partie->getConfig()->getEmb8Pos();
                 $perdant = $this->partie->getConfig()->getEmb8Neg();
                 $this->setContratPartants("Emballage 8");
                 $nbJoueur = 2;    
             break;
-            case "emb9":
+            case "emb_9":
                 $gagnant = $this->partie->getConfig()->getEmb9Pos();
                 $perdant = $this->partie->getConfig()->getEmb9Neg();
                 $this->setContratPartants("Emballage 9");
                 $nbJoueur = 2;
             break;
-            case "emb10":
+            case "emb_10":
                 $gagnant = $this->partie->getConfig()->getEmb10Pos();
                 $perdant = $this->partie->getConfig()->getEmb10Neg();
                 $this->setContratPartants("Emballage 10");
                 $nbJoueur = 2;
             break;
-            case "emb11":
+            case "emb_11":
                 $gagnant = $this->partie->getConfig()->getEmb11Pos();
                 $perdant = $this->partie->getConfig()->getEmb11Neg();
                 $this->setContratPartants("Emballage 11");
                 $nbJoueur = 2;
             break;
-            case "emb12":
+            case "emb_12":
                 $gagnant = $this->partie->getConfig()->getEmb12Pos();
                 $perdant = $this->partie->getConfig()->getEmb12Neg();
                 $this->setContratPartants("Emballage 12");
                 $nbJoueur = 2;
             break;
             // SOLO
-            case "solo6":
+            case "solo_6":
                 $gagnant = $this->partie->getConfig()->getSolo6Pos();
                 $perdant = $this->partie->getConfig()->getSolo6Neg();
                 $this->setContratPartants("Solo 6");
                 $nbJoueur = 1;
             break;
-            case "solo7":
+            case "solo_7":
                 $gagnant = $this->partie->getConfig()->getSolo7Pos();
                 $perdant = $this->partie->getConfig()->getSolo7Neg();
                 $this->setContratPartants("Solo 7");
                 $nbJoueur = 1;
             break;
-            case "solo8":
+            case "solo_8":
                 $gagnant = $this->partie->getConfig()->getSolo8Pos();
                 $perdant = $this->partie->getConfig()->getSolo8Neg();
                 $this->setContratPartants("Solo 8");
                 $nbJoueur = 1;
             break;
             // Picolissimo, picolo, petite misère
-            case "picoli":
+            case "picoli_":
                 $gagnant = $this->partie->getConfig()->getPicoliPos();
                 $perdant = $this->partie->getConfig()->getPicoliNeg();
                 $this->setContratPartants("Picolissimo");
                 $nbJoueur = $this->bienAccompagne();
             break; 
-            case "picolo":
+            case "picolo_":
                 $gagnant = $this->partie->getConfig()->getPicoloPos();
                 $perdant = $this->partie->getConfig()->getPicoloNeg();
                 $this->setContratPartants("Picolo");
                 $nbJoueur = $this->bienAccompagne();
             break; 
-            case "pmis":
+            case "pmis_":
                 $gagnant = $this->partie->getConfig()->getPmisPos();
                 $perdant = $this->partie->getConfig()->getPmisNeg();
                 $this->setContratPartants("Petite misère");
                 $nbJoueur = $this->bienAccompagne();
             break; 
             // Abondance
-            case "abon9":
+            case "abon_9":
                 $gagnant = $this->partie->getConfig()->getAbon9Pos();
                 $perdant = $this->partie->getConfig()->getAbon9Neg();
                 $this->setContratPartants("Abondance 9");
                 $nbJoueur = 1;
             break;
-            case "abon10":
+            case "abon_10":
                 $gagnant = $this->partie->getConfig()->getAbon10Pos();
                 $perdant = $this->partie->getConfig()->getAbon10Neg();
                 $this->setContratPartants("Abondance 10");
                 $nbJoueur = 1;
             break;
-            case "abon11":
+            case "abon_11":
                 $gagnant = $this->partie->getConfig()->getAbon11Pos();
                 $perdant = $this->partie->getConfig()->getAbon11Neg();
                 $this->setContratPartants("Abondance 11");
                 $nbJoueur = 1;
             break;
             // Abondance sur table
-            case "abonst9":
+            case "abonst_9":
                 $gagnant = $this->partie->getConfig()->getAbonst9Pos();
                 $perdant = $this->partie->getConfig()->getAbonst9Neg();
                 $this->setContratPartants("Abondance 9 sur table");
                 $nbJoueur = 1;
             break;
-            case "abonst10":
+            case "abonst_10":
                 $gagnant = $this->partie->getConfig()->getAbonst10Pos();
                 $perdant = $this->partie->getConfig()->getAbonst10Neg();
                 $this->setContratPartants("Abondance 10 sur table");
                 $nbJoueur = 1;
             break;
-            case "abonst11":
+            case "abonst_11":
                 $gagnant = $this->partie->getConfig()->getAbonst11Pos();
                 $perdant = $this->partie->getConfig()->getAbonst11Neg();
                 $this->setContratPartants("Abondance 11 sur table");
                 $nbJoueur = 1;
             break;
             // Grande misère
-            case "gmis":
+            case "gm_is":
                 $gagnant = $this->partie->getConfig()->getGmisPos();
                 $perdant = $this->partie->getConfig()->getGmisNeg();
                 $this->setContratPartants("Grande misère");
                 $nbJoueur = 1;
             break;
-            case "gmst":
+            case "gm_st":
                 $gagnant = $this->partie->getConfig()->getGmstPos();
                 $perdant = $this->partie->getConfig()->getGmstNeg();
                 $this->setContratPartants("Grande misère sur trou");
                 $nbJoueur = 1;
             break;
-            case "gmsta":
+            case "gm_sta":
                 $gagnant = $this->partie->getConfig()->getGmstaPos();
                 $perdant = $this->partie->getConfig()->getGmstaNeg();
                 $this->setContratPartants("Grande misère sur table");
                 $nbJoueur = 1;
             break;
-            case "gmstt":
+            case "gm_stt":
                 $gagnant = $this->partie->getConfig()->getGmsttPos();
                 $perdant = $this->partie->getConfig()->getGmsttNeg();
                 $this->setContratPartants("Grande misère sur trou sur table");
                 $nbJoueur = 1;
             break;
             // Le reste : trou, capot, chelem et solo chelem
-            case "trou":
+            case "trou_":
                 $gagnant = $this->partie->getConfig()->getTrou();
                 $perdant = $this->partie->getConfig()->getTrou();
                 $this->setContratPartants("Trou");
                 $nbJoueur = 2;
             break;
-            case "capot":
+            case "capot_":
                 $gagnant = $this->partie->getConfig()->getCapot();
                 $perdant = $this->partie->getConfig()->getCapot();
                 $this->setContratPartants("Capot");
                 $nbJoueur = 2;
             break;
-            case "ptsm":
+            case "ptsm_":
                 $gagnant = $this->partie->getConfig()->getPtsm();
                 $perdant = $this->partie->getConfig()->getPtsm();
                 $this->setContratPartants("Chelem");
                 $nbJoueur = 1;
             break;
-            case "gdsm":
+            case "gdsm_":
                 $gagnant = $this->partie->getConfig()->getGdsm();
                 $perdant = $this->partie->getConfig()->getGdsm();
                 $this->setContratPartants("Solo chelem");

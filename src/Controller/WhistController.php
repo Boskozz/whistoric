@@ -12,6 +12,9 @@ use App\Form\ContratConfigType;
 use App\Repository\CarteRepository;
 use App\Repository\PartieRepository;
 use App\Repository\ContratConfigRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,9 +33,10 @@ class WhistController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * Lance la création de la partie en y renseignant le nom de chaque joueurs et le nombre de carté total
      *
-     * @Route("/launch", name="whist_launch")
+     * @Route("/lancement-de-la-partie", name="whist_launch")
      * @return Response
      */
     public function launch(Request $request, ObjectManager $manager) 
@@ -73,16 +77,21 @@ class WhistController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-    
+
     /**
      * Permet d'afficher la partie en cours
-     *
-     * @Route("/show/{id}", name="whist_show")
+     * @IsGranted("ROLE_USER")
+     * @Route("/la-partie-{id}", name="whist_show")
+     * @param Partie $partie
+     * @param Request $request
+     * @param ObjectManager $manager
+     * @param CarteRepository $repo
      * @return Response
+     * @throws \Exception
      */
     public function show(Partie $partie, Request $request, ObjectManager $manager, CarteRepository $repo)
     {
-        $i;
+        //$i;
         $score = 0;
         for ($i = $partie->getTotCarte(); $i >= 1; $i--){
             
@@ -91,30 +100,34 @@ class WhistController extends AbstractController
             $form = $this->createForm(CarteType::class, $carte, [
                 'partieId' => $partie->getId(),
             ]);
-            dump($i);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()){
-                $carte->setFinDate(new \DateTime());
-                $carte->setPartie($partie);
-                $i = $carte->leBrin($i);
-                $pointCarte = $carte->points();
-                foreach ($partie->getJoueurs() as $joueur){
-                    $joueur->getPointsSuite($pointCarte, $carte);
+                $test = $this->verifyCarte($carte);
+                if ($test == true) {
+                    $carte->setFinDate(new \DateTime());
+                    $carte->setPartie($partie);
+                    $i = $carte->leBrin($i);
+                    $pointCarte = $carte->points();
+                    foreach ($partie->getJoueurs() as $joueur) {
+                        $joueur->getPointsSuite($pointCarte, $carte);
+                    }
+                    $carte->setNumero($i);
+                    $partie->setTotCarte($i - 1);
+                    if ($partie->getTotCarte() == 1) {
+                        $partie->setEnCours(false);
+                    }
+                    // PrePersist
+                    $tot = $partie->getTotCarte();
+                    $manager->persist($carte);
+                    $manager->flush();
+
+                    $this->addFlash(
+                        'success',
+                        "$tot carté(s) restant"
+                    );
+                } else {
+                    $form->get('contrat')->addError(new FormError("Les informations transmisent ne sont pas correctes !"));
                 }
-                $carte->setNumero($i);
-                $partie->setTotCarte($i-1);
-                if ($partie->getTotCarte() == 1){
-                    $partie->setEnCours(false);
-                }
-                // PrePersist
-                $tot = $partie->getTotCarte();
-                $manager->persist($carte);
-                $manager->flush();
-                
-                $this->addFlash(
-                    'success',
-                    "$tot carté(s) restant"
-                );
                
             }
             return $this->render('whist/show.html.twig', [
@@ -130,19 +143,58 @@ class WhistController extends AbstractController
             'cartes' => $cartes,
             'i' => $i
         ]);
-
-        //$config = $partie->getConfig();
-            //dump($carte);
-
-           //die;
-            
     }
 
     /**
+     * Permet de vérifier le carte à valider - renvoie true si valide
+     * @param $carte
+     * @return bool
+     */
+    private function verifyCarte(Carte $carte) {
+        if ($carte->getContrat() == null) {
+            return false;
+        }
+        $contrat = explode("_", $carte->getContrat())[0];
+        $pli = explode("_", $carte->getContrat())[1];
+        $nbPartants = 0;
+        $accompagne = $carte->getAccompagne();
+        foreach ($carte->getPartants() as $partant){
+            $nbPartants += 1;
+        }
+        //dump($nbPartants, $contrat, $accompagne);
+        if ($nbPartants == 2 and $accompagne == false){
+            if ($contrat == "emb" or $contrat == "capot" or $contrat == "trou") {
+                return true;
+            }
+            return false;
+        } elseif ($nbPartants == 2 and $accompagne == true) {
+            if ($contrat == "picoli" or $contrat == "picolo" or $contrat == "pmis") {
+                return true;
+            }
+            return false;
+        } elseif ($nbPartants == 1 and $accompagne == false) {
+            if ($contrat == "solo" or $contrat == "abon" or $contrat == "abonst") {
+                return true;
+            }
+            if ($contrat == "picoli" or $contrat == "picolo" or $contrat == "pmis") {
+                return true;
+            }
+            if ($contrat == "ptsm" or $contrat == "gdsm" or $contrat == "gm") {
+                return true;
+            }
+            return false;
+        } else {
+            return false;
+        }
+        //return false;
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
      * Affiche la liste des parties de l'utilisateur en cours et terminée
      * @Route("/parties", name="partie_encours")
      * PartieRepository $repo
-     * @return void
+     * @return Response
      */
     public function enCours(){
         $user = $this->getUser();
@@ -154,8 +206,8 @@ class WhistController extends AbstractController
 
     /**
      * Création d'une configuration personnalisée et liste les configs déjà disponibles
-     * @Route("/configuration/creation", name="config_create")
-     *
+     * @Route("/configurations/creation", name="config_create")
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function createConfig(Request $request, ObjectManager $manager){
@@ -181,6 +233,7 @@ class WhistController extends AbstractController
     /**
      * Visualisation des configs disponibles
      * @Route("/configurations", name="config_show")
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function showConfig(ContratConfigRepository $repo){

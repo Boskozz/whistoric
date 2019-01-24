@@ -77,9 +77,15 @@ class User implements UserInterface
      */
     private $parties;
 
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $roles = [];
+
     public function __construct()
     {
         $this->parties = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
     }
 
     /**
@@ -218,7 +224,14 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getPassword(){
@@ -236,7 +249,7 @@ class User implements UserInterface
 
     /**
      * Get the value of passwordConfirm
-     */ 
+     */
     public function getPasswordConfirm()
     {
         return $this->passwordConfirm;
@@ -246,7 +259,7 @@ class User implements UserInterface
      * Set the value of passwordConfirm
      *
      * @return  self
-     */ 
+     */
     public function setPasswordConfirm($passwordConfirm)
     {
         $this->passwordConfirm = $passwordConfirm;
