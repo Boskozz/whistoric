@@ -4,9 +4,17 @@ Extension ovh = 2€/mois
 
 Flo : ami-du-whist
 Nico : whistiti
-JS : whistory
+JS : whistory / whistoric
 
+Correctif 0.1 - 24/01/2019
+--------------------------
+--> Ajout du README.md pour Git
+--> Ajout d'un logo dans le header
+--> Modification du titre de la page d'accueil
+--> mise à jour du jumbotron : titre et description sommaire
 
+Mise en ligne le 24/01/2019
+---------------------------
 --> Privatiser le site:
  -> suppression register dans header et securisé par ROLE_ADMIN
  -> ajout du champ role dans User
